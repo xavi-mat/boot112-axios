@@ -11,44 +11,104 @@ const DOGAPI = "https://dog.ceo/dog-api/";
 
 ////////////////////////////////////////////////////////////////////////////////
 // DOM
-
+const inputBreed = document.querySelector('#input-breed');
+const container = document.querySelector('#container');
+const showBtn = document.querySelector('#show-btn');
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
-let breeds;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Classes
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Utils
 const getData = (url, callback, log) => {
     axios(url)
-        .then(res => callback(log, res.data));
+        .then(res =>
+            callback(log, res.data)
+        )
+        .catch((e) => console.log("What the what?", e));
 }
 
-const printMessage = (log, data) => console.log(log, data.message);
+const printMessage = (log, data) =>
+    console.log('\n/////////////////////////\n// ' + log, data.message);
+
+const showArrayOnDOM = (log, data) => {
+    const newDiv = document.createElement('div');
+    newDiv.innerHTML = '<h3>' + log + '</h3>';
+    data.message.forEach(breed => {
+        newDiv.innerHTML += breed + '<br>'
+    });
+    container.appendChild(newDiv);
+}
+
+const showIMGOnDOM = (log, data) => {
+    const newImg = document.createElement('img');
+    newImg.src = data.message;
+    container.appendChild(newImg);
+}
+
+const show5ImagesOnDOM = (log, data) => {
+    data.message.slice(0, 5).forEach(
+        (img) => {
+            const newImg = document.createElement('img');
+            newImg.src = img;
+            container.appendChild(newImg);
+        }
+    )
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // Functions
 const printAllBreeds = () => {
     getData("https://dog.ceo/api/breeds/list",
-            printMessage,
-            "/////////////////////////\n// 1.PRINT ALL BREEDS");
+        printMessage,
+        "1.PRINT ALL BREEDS");
 }
 
 const printRandomImage = (breed) => {
     getData(`https://dog.ceo/api/breed/${breed}/images/random`,
-            printMessage,
-            "\n/////////////////////////\n// 2.PRINT RANDOM IMAGE");
+        printMessage,
+        "2.PRINT RANDOM IMAGE");
 }
 
 const printAllImages = (breed) => {
     getData(`https://dog.ceo/api/breed/${breed}/images`,
-            printMessage,
-            "\n/////////////////////////\n// 3.PRINT ALL IMAGES");
+        printMessage,
+        "3.PRINT ALL IMAGES");
 }
+
+const printAllBreedsOnDOM = () => {
+    getData("https://dog.ceo/api/breeds/list",
+        showArrayOnDOM,
+        "4.PRINT ALL BREEDS");
+}
+
+const showRandomImageOnDOM = (breed) => {
+    getData(`https://dog.ceo/api/breed/${breed}/images/random`,
+        showIMGOnDOM,
+        "5.SHOW RANDOM IMG ON DOM");
+}
+
+const showFiveImagesOnDOM = (breed) => {
+    getData(`https://dog.ceo/api/breed/${breed}/images`,
+        show5ImagesOnDOM,
+        "5.SHOW RANDOM IMG ON DOM");
+}
+
+const showImgsFromInput = (e) => {
+    const breed = inputBreed.value;
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+    showFiveImagesOnDOM(breed);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Listeners
+showBtn.addEventListener("click", showImgsFromInput)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init
@@ -56,3 +116,6 @@ printAllBreeds();
 printRandomImage("germanshepherd");
 printAllImages("germanshepherd");
 
+printAllBreedsOnDOM();
+showRandomImageOnDOM("germanshepherd");
+showFiveImagesOnDOM("germanshepherd");

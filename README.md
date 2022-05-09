@@ -17,6 +17,6 @@ https://classroom.google.com/u/0/c/NDgwNDYwMTI2OTAz/a/NTExNDQwNDI4NjY4/details
   * [x] Function & Listener
   * [x] Functionality
 
-* [ ] Wrap inputs and buttons in forms
+* [x] Wrap inputs and buttons in forms
 
-* [ ] All done!
+* [x] All done!

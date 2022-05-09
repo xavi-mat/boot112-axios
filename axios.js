@@ -8,12 +8,14 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
 const DOGAPI = "https://dog.ceo/dog-api/";
+const GITHUBAPI = "https://api.github.com/users/";
 
 ////////////////////////////////////////////////////////////////////////////////
 // DOM
 const inputBreed = document.querySelector('#input-breed');
 const container = document.querySelector('#container');
 const showBtn = document.querySelector('#show-btn');
+const getUserDataBtn = document.querySelector('#get-user-data-btn');
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
@@ -106,9 +108,15 @@ const showImgsFromInput = (e) => {
     showFiveImagesOnDOM(breed);
 }
 
+const getGitHubUserData = () => {
+    
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // Listeners
-showBtn.addEventListener("click", showImgsFromInput)
+showBtn.addEventListener("click", showImgsFromInput);
+getUserDataBtn.addEventListener("click", getGitHubUserData);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init

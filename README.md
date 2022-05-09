@@ -13,3 +13,8 @@ https://classroom.google.com/u/0/c/NDgwNDYwMTI2OTAz/a/NTExNDQwNDI4NjY4/details
 * [x] 1.3. Parameters
 
 * [ ] 2. GitHub API
+  * [x] Form
+  * [x] Function & Listener
+  * [ ] Functionality
+
+* [ ] All done!

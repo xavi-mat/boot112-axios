@@ -16,6 +16,7 @@ const inputBreed = document.querySelector('#input-breed');
 const container = document.querySelector('#container');
 const showBtn = document.querySelector('#show-btn');
 const getUserDataBtn = document.querySelector('#get-user-data-btn');
+const searchText = document.querySelector('#search-text');
 
 ////////////////////////////////////////////////////////////////////////////////
 // Globals
@@ -108,8 +109,21 @@ const showImgsFromInput = (e) => {
     showFiveImagesOnDOM(breed);
 }
 
-const getGitHubUserData = () => {
-    
+const putUserData = (user) => {
+    container.innerHTML = `Nombre: ${user.login}<br>
+        Num. repositorios: ${user.public_repos}<br>
+        <img src="${user.avatar_url}">`;
+}
+
+const getGitHubUserData = async () => {
+    const userName = searchText.value;
+    try {
+        const res = await axios(GITHUBAPI + userName);
+        putUserData(res.data)
+    } catch (error) {
+        console.error(error);
+        putUserData({login:'NOT FOUND'});
+    }
 }
 
 

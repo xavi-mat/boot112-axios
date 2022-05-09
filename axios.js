@@ -14,8 +14,8 @@ const GITHUBAPI = "https://api.github.com/users/";
 // DOM
 const inputBreed = document.querySelector('#input-breed');
 const container = document.querySelector('#container');
-const showBtn = document.querySelector('#show-btn');
-const getUserDataBtn = document.querySelector('#get-user-data-btn');
+const showBtn = document.querySelector('#show-dog');
+const getUserDataBtn = document.querySelector('#search-user');
 const searchText = document.querySelector('#search-text');
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ const showArrayOnDOM = (log, data) => {
     const newDiv = document.createElement('div');
     newDiv.innerHTML = '<h3>' + log + '</h3>';
     data.message.forEach(breed => {
-        newDiv.innerHTML += breed + '<br>'
+        newDiv.innerHTML += breed + ', '
     });
     container.appendChild(newDiv);
 }
@@ -102,7 +102,8 @@ const showFiveImagesOnDOM = (breed) => {
 }
 
 const showImgsFromInput = (e) => {
-    const breed = inputBreed.value;
+    e.preventDefault();
+    const breed = inputBreed.value.toLowerCase();
     while (container.firstChild) {
         container.removeChild(container.firstChild);
     }
@@ -115,7 +116,8 @@ const putUserData = (user) => {
         <img src="${user.avatar_url}">`;
 }
 
-const getGitHubUserData = async () => {
+const getGitHubUserData = async (e) => {
+    e.preventDefault();
     const userName = searchText.value;
     try {
         const res = await axios(GITHUBAPI + userName);
@@ -129,8 +131,8 @@ const getGitHubUserData = async () => {
 
 ////////////////////////////////////////////////////////////////////////////////
 // Listeners
-showBtn.addEventListener("click", showImgsFromInput);
-getUserDataBtn.addEventListener("click", getGitHubUserData);
+showBtn.addEventListener("submit", showImgsFromInput);
+getUserDataBtn.addEventListener("submit", getGitHubUserData);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Init

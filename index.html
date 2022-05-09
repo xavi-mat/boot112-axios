@@ -12,16 +12,20 @@
 
 <body>
     <h3>Please, open the console.</h3>
-    <fieldset>
-        <legend>Dog API</legend>
-        <input type="text" id="input-breed" value="germanshepherd" placeholder="Breed">
-        <button id="show-btn">Show images</button>
-    </fieldset>
-    <fieldset>
-        <legend>GitHub API</legend>
-        <input type="text" name="user" id="search-text" placeholder="Github User">
-        <button id="get-user-data-btn">Get user data</button>
-    </fieldset>
+    <form id="show-dog">
+        <fieldset>
+            <legend>Dog API</legend>
+            <input type="text" id="input-breed" value="germanshepherd" placeholder="Breed">
+            <input type="submit" value="Show images">
+        </fieldset>
+    </form>
+    <form id="search-user">
+        <fieldset>
+            <legend>GitHub API</legend>
+            <input type="text" name="user" id="search-text" placeholder="Github User">
+            <input type="submit" value="Get user data">
+        </fieldset>
+    </form>
     <div id="container"></div>
 </body>
 
